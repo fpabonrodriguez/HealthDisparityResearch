@@ -33,61 +33,61 @@ invisible(install_load(my_packages))
 ########################################################################
 
 # Year 2020
-medq1y20 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q12020.csv",
+medq1y20 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q1_2020.csv",
                      header = TRUE,
                      na.strings = "*")
-medq2y20 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q22020.csv",
+medq2y20 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q2_2020.csv",
                      header = TRUE,
                      na.strings = "*")
-medq3y20 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q32020.csv",
+medq3y20 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q3_2020.csv",
                      header = TRUE,
                      na.strings = "*")
-medq4y20 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q42020.csv",
+medq4y20 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q4_2020.csv",
                      header = TRUE,
                      na.strings = "*")
 
 # Year 2021
-medq1y21 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q12021.csv",
+medq1y21 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q1_2021.csv",
                      header = TRUE,
                      na.strings = "*")
-medq2y21 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q22021.csv",
+medq2y21 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q2_2021.csv",
                      header = TRUE,
                      na.strings = "*")
-medq3y21 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q32021.csv",
+medq3y21 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q3_2021.csv",
                      header = TRUE,
                      na.strings = "*")
-medq4y21 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q42021.csv",
+medq4y21 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q4_2021.csv",
                      header = TRUE,
                      na.strings = "*")
 
 # Year 2022
-medq1y22 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q12022.csv",
+medq1y22 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q1_2022.csv",
                      header = TRUE,
                      na.strings = "*")
-medq2y22 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q22022.csv",
+medq2y22 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q2_2022.csv",
                      header = TRUE,
                      na.strings = "*")
-medq3y22 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q32022.csv",
+medq3y22 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q3_2022.csv",
                      header = TRUE,
                      na.strings = "*")
-medq4y22 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q42022.csv",
+medq4y22 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q4_2022.csv",
                      header = TRUE,
                      na.strings = "*")
 
 
 # Year 2023
-medq1y23 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q12023.csv",
+medq1y23 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q1_2023.csv",
                      header = TRUE,
                      na.strings = "*")
-medq2y23 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q22023.csv",
+medq2y23 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q2_2023.csv",
                      header = TRUE,
                      na.strings = "*")
-medq3y23 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q32023.csv",
+medq3y23 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q3_2023.csv",
                      header = TRUE,
                      na.strings = "*")
-#medq4y23 <- read.csv(file = "./MinimumDatasets/Minimum_Data_Set_(MDS)_Frequency_Q42020.csv",
-#                     header = TRUE,
-#                     na.strings = "*")
+medq4y23 <- read.csv(file = "./MinimumDatasets/MDS_Frequency_Q4_2023.csv",
+                     header = TRUE,
+                     na.strings = "*")
 
 # Vector of states and features within the data
 unique_states <- unique(medq1y20$Geographical.Location)
@@ -191,13 +191,13 @@ yr2022 <- rbind(medq1y22,
              medq4y22)
 yr2023 <- rbind(medq1y23,
              medq2y23,
-             medq3y23)
+             medq3y23,
+             medq4y23)
 
 
 ########################################################################
 # Mapping
 ########################################################################
-
 
 get_temp_map <- function(data,feature,type,year,foldername,...){
 
@@ -217,7 +217,7 @@ get_temp_map <- function(data,feature,type,year,foldername,...){
                            type = "div",
                            guide = "colourbar",
                            limits = c(0,100)) + 
-      labs(title = feature[i], fill = "Percent Represented") + 
+      labs(title = feature[i], fill = "Percent Individuals Represented") + 
       theme_void() +
       theme(plot.title = element_text(size=800/nchar(feature[i]),
                                       hjust = 0.5),
@@ -225,7 +225,8 @@ get_temp_map <- function(data,feature,type,year,foldername,...){
             legend.key.height = unit(0.5, "cm"),
             legend.key.width = unit(2, "cm"),
             legend.text = element_text(size = 12),
-            legend.title = element_text(size = 12)) +
+            legend.title = element_text(size = 12),
+            strip.text = element_text(size=4)) +
       facet_wrap(MDS.Item.Response ~ Report.Date, ncol = 4)
     print(g)
     dev.off()
@@ -306,33 +307,6 @@ get_temp_map(data = yr2022, year = "2022", type = "Status",
 get_temp_map(data = yr2023, year = "2023", type = "Status",
              feature = unique_features[overall_var],
              foldername = "OverallHealthStatus")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
